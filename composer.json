@@ -1,0 +1,33 @@
+{
+	"name": "phpgt/logger",
+	"description": "PSR-3 logger and implementation.",
+	"type": "library",
+
+	"require": {
+		"php": "^7.2"
+	},
+
+	"require-dev": {
+		"phpunit/phpunit": "7.*"
+	},
+
+	"license": "MIT",
+
+	"authors": [
+		{
+			"name": "Greg Bowler",
+			"email": "greg.bowler@g105b.com"
+		}
+	],
+
+	"autoload": {
+		"psr-4": {
+			"Gt\\Logger\\": "./src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Gt\\Logger\\Test\\": "./test/unit"
+		}
+	}
+}
