@@ -3,6 +3,7 @@ namespace Gt\Logger\Test;
 
 use Gt\Logger\Log;
 use Gt\Logger\LogConfig;
+use Gt\Logger\LogLevel;
 use Gt\Logger\Test\Helper\StdOutToEcho;
 use PHPUnit\Framework\TestCase;
 
@@ -10,8 +11,15 @@ class LogTest extends TestCase {
 	public function testStaticUsage() {
 		$message = "Test info log";
 		self::redirectDefaultHandlerToTestOutput();
-		self::expectOutputRegex("/\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d\tINFO\t$message/");
-		Log::info($message);
+
+		$expectedRegex = "";
+
+		foreach(LogLevel::ALL_LEVELS as $level) {
+			$lcLevel = strtolower($level);
+			call_user_func("\\Gt\\Logger\\Log::$lcLevel", $message);
+			$expectedRegex .= "\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d\s+$level\s+$message\n";
+		}
+		self::expectOutputRegex("/$expectedRegex/");
 	}
 
 	protected function redirectDefaultHandlerToTestOutput():void {

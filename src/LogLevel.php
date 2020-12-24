@@ -10,4 +10,15 @@ class LogLevel {
 	const CRITICAL = "CRITICAL";
 	const ALERT = "ALERT";
 	const EMERGENCY = "EMERGENCY";
+
+	const ALL_LEVELS = [
+		self::DEBUG,
+		self::INFO,
+		self::NOTICE,
+		self::WARNING,
+		self::ERROR,
+		self::CRITICAL,
+		self::ALERT,
+		self::EMERGENCY,
+	];
 }

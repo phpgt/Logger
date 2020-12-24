@@ -48,7 +48,6 @@ abstract class LogHandler {
 		array $context = []
 	):string {
 		$logLine = implode($this->separator, $this->logFormat);
-		$logLine .= $this->logLineEnding;
 
 		$logLine = str_replace(
 			self::LOG_PART_TIMESTAMP,
@@ -71,6 +70,6 @@ abstract class LogHandler {
 			$logLine
 		);
 
-		return $logLine;
+		return trim($logLine) . $this->logLineEnding;
 	}
 }
