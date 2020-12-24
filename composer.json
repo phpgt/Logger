@@ -4,11 +4,12 @@
 	"type": "library",
 
 	"require": {
-		"php": ">=7.2"
+		"php": ">=7.4"
 	},
 
 	"require-dev": {
-		"phpunit/phpunit": "^9.5.0"
+		"phpunit/phpunit": "^9.5.0",
+		"phpstan/phpstan": ">=0.12.64"
 	},
 
 	"license": "MIT",
@@ -27,7 +28,7 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Gt\\Logger\\Test\\": "./test/unit"
+			"Gt\\Logger\\Test\\": "./test/phpunit"
 		}
 	}
 }
