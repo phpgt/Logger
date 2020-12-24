@@ -6,6 +6,7 @@ class FileHandler extends LogHandler {
 	/** @var resource */
 	protected $resource;
 
+	/** @param array<string> $logFormat */
 	public function __construct(
 		string $path,
 		string $timestampFormat = "Y-m-d H:i:s",
@@ -39,6 +40,7 @@ class FileHandler extends LogHandler {
 		return $this->resource;
 	}
 
+	/** @param array<string> $context */
 	protected function unwrapContext(array $context):string {
 		$unwrapped = "";
 

@@ -16,10 +16,12 @@ abstract class LogHandler {
 	const LOG_PART_CONTEXT = "{CONTEXT}";
 
 	private string $timestampFormat;
+	/** @var array<string> */
 	protected array $logFormat;
 	protected string $separator;
 	protected string $logLineEnding;
 
+	/** @param array<string> $logFormat */
 	public function __construct(
 		string $timestampFormat = "Y-m-d H:i:s",
 		array $logFormat = self::DEFAULT_LOG_FORMAT,
@@ -32,16 +34,19 @@ abstract class LogHandler {
 		$this->logLineEnding = $logLineEnding;
 	}
 
+	/** @param array<string> $context */
 	abstract public function handle(
 		string $level,
 		string $message,
 		array $context = []
 	):void;
 
+	/** @param array<string> $context */
 	abstract protected function unwrapContext(
 		array $context
 	):string;
 
+	/** @param array<string> $context */
 	protected function getLogLine(
 		string $level,
 		string $message,

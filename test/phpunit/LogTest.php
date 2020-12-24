@@ -16,7 +16,7 @@ class LogTest extends TestCase {
 
 		foreach(LogLevel::ALL_LEVELS as $level) {
 			$lcLevel = strtolower($level);
-			call_user_func("\\Gt\\Logger\\Log::$lcLevel", $message);
+			call_user_func(Log::class . "::$lcLevel", $message);
 			$expectedRegex .= "\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d\s+$level\s+$message\n";
 		}
 		self::expectOutputRegex("/$expectedRegex/");
