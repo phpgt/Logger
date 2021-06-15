@@ -8,7 +8,7 @@ use Gt\Logger\Test\Helper\StdOutToEcho;
 use PHPUnit\Framework\TestCase;
 
 class LogTest extends TestCase {
-	public function testStaticUsage() {
+	public function test_staticCalls():void {
 		$message = "Test info log";
 		self::redirectDefaultHandlerToTestOutput();
 
@@ -20,6 +20,38 @@ class LogTest extends TestCase {
 			$expectedRegex .= "\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d\s+$level\s+$message\n";
 		}
 		self::expectOutputRegex("/$expectedRegex/");
+	}
+
+	public function test_context():void {
+		$message = "Test info log";
+		$context = [
+			"test-type" => "PHPUnit",
+			"this" => "that"
+		];
+		self::redirectDefaultHandlerToTestOutput();
+
+		self::expectOutputRegex(
+			"/\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d\s+ERROR\s+$message\s+\[test-type = PHPUnit\] \[this = that\]\n/"
+		);
+		Log::error($message, $context);
+	}
+
+	public function test_nestedContent():void {
+		$message = "Test info log";
+		$context = [
+			"test-type" => "PHPUnit",
+			"nested" => [
+				"one" => "first",
+				"two" => "second",
+			],
+			"this" => "that"
+		];
+		self::redirectDefaultHandlerToTestOutput();
+
+		self::expectOutputRegex(
+			"/\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d\s+ERROR\s+$message\s+\[test-type = PHPUnit\] \[nested = \{\[one = first\] \[two = second\]\}\] \[this = that\]\n/"
+		);
+		Log::error($message, $context);
 	}
 
 	protected function redirectDefaultHandlerToTestOutput():void {

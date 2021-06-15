@@ -4,7 +4,7 @@ namespace Gt\Logger\Test\Helper;
 use php_user_filter;
 
 class StdOutToEcho extends php_user_filter {
-	public function filter($in, $out, &$consumed, $closing) {
+	public function filter($in, $out, &$consumed, $closing):int {
 		$buffer = "";
 		while($bucket = stream_bucket_make_writeable($in)) {
 			$buffer .= $bucket->data;

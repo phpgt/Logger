@@ -40,16 +40,22 @@ class FileHandler extends LogHandler {
 		return $this->resource;
 	}
 
-	/** @param array<string> $context */
+	/** @param array<string|array<string>> $context */
 	protected function unwrapContext(array $context):string {
 		$unwrapped = "";
 
 		foreach($context as $key => $value) {
 			if(strlen($unwrapped) > 0) {
-				$unwrapped .= ", ";
+				$unwrapped .= " ";
 			}
 
-			$unwrapped .= "$key => $value";
+			if(is_array($value)) {
+				$value = "{"
+					. $this->unwrapContext($value)
+					. "}";
+			}
+
+			$unwrapped .= "[$key = $value]";
 		}
 
 		return $unwrapped;
