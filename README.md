@@ -35,11 +35,13 @@ Usage example
 use Gt\Logger\Log;
 use Gt\Logger\LogConfig;
 use Gt\Logger\LogLevel;
+use Gt\Logger\LogHandler\StreamHandler;
+use Gt\Logger\LogHandler\FileHandler;
 
 // Send warnings and above to the remote socket.
-LogConfig::addSocketHandler("/example/remote.sock", LogLevel::WARNING);
+LogConfig::addHandler(new StreamHandler("/example/remote.sock"), LogLevel::WARNING);
 // Send all log types to the local log file.
-LogConfig::addFileHandler("/var/log/example.log", LogLevel::DEBUG);
+LogConfig::addHandler(new FileHandler("/var/log/example.log"), LogLevel::DEBUG);
 
 $fileName = "name.txt";
 if(file_exists($fileName)) {
@@ -58,6 +60,7 @@ else {
 }
 ```
 
+[styleguide-static]: https://github.com/PhpGt/StyleGuide/blob/master/classes/members.md#classes-should-have-all-or-no-static-members
 [psr3]: https://www.php-fig.org/psr/psr-3/
 [syslog]: https://tools.ietf.org/html/rfc5424
 [examples]: https://github.com/PhpGt/Logger/tree/master/examples
