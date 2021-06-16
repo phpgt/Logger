@@ -5,14 +5,35 @@ use Gt\Logger\LogHandler\LogHandler;
 use Gt\Logger\LogHandler\StdOutHandler;
 
 class LogConfig {
-	/** @var LogHandler[] */
-	private static array $handlers;
+	/** @var array<LogHandler> */
+	private static array $handlers = [];
+	/** @var array<string> */
+	private static array $handlerLevels = [];
+
 	private static StdOutHandler $defaultHandler;
+	private static string $defaultHandlerLevel = LogLevel::DEBUG;
 
 	/** @return LogHandler[] */
-	public static function getHandlers():array {
+	public static function getHandlers(
+		string $logLevel = LogLevel::DEBUG
+	):array {
 		self::ensureAtLeastOneHandler();
-		return self::$handlers;
+		$logLevel = strtoupper($logLevel);
+		$logLevelIndex = array_flip(LogLevel::ALL_LEVELS)[$logLevel];
+
+		$handlerArray = [];
+		foreach(self::$handlers as $i => $handler) {
+			$handlerLevel = strtoupper(self::$handlerLevels[$i]);
+			$handlerLevelIndex = array_flip(LogLevel::ALL_LEVELS)[$handlerLevel];
+
+			if($handlerLevelIndex < $logLevelIndex) {
+				continue;
+			}
+
+			array_push($handlerArray, $handler);
+		}
+
+		return $handlerArray;
 	}
 
 	public static function getDefaultHandler():StdOutHandler {
@@ -23,12 +44,22 @@ class LogConfig {
 		return self::$defaultHandler;
 	}
 
+	public static function addHandler(LogHandler $handler, string $logLevel = null):void {
+		array_push(self::$handlers, $handler);
+		array_push(self::$handlerLevels, $logLevel ?? self::$defaultHandlerLevel);
+	}
+
 	private static function ensureAtLeastOneHandler():void {
 		if(!isset(self::$handlers)) {
 			self::$handlers = array();
 			array_push(
 				self::$handlers,
 				self::getDefaultHandler()
+			);
+			self::$handlerLevels = array();
+			array_push(
+				self::$handlerLevels,
+				self::$defaultHandlerLevel
 			);
 		}
 	}
