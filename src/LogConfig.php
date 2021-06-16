@@ -50,7 +50,7 @@ class LogConfig {
 	}
 
 	private static function ensureAtLeastOneHandler():void {
-		if(!isset(self::$handlers)) {
+		if(empty(self::$handlers)) {
 			self::$handlers = array();
 			array_push(
 				self::$handlers,

@@ -1,12 +1,13 @@
 <?php
 namespace Gt\Logger\Test;
 
-use _HumbugBox373c0874430e\Psr\Log\LogLevel;
 use Gt\Logger\LogConfig;
 use Gt\Logger\LogHandler\FileHandler;
 use Gt\Logger\LogHandler\StdOutHandler;
+use Gt\Logger\LogLevel;
 use PHPUnit\Framework\TestCase;
 
+/** @runTestsInSeparateProcesses  */
 class LogConfigTest extends TestCase {
 	public function testGetHandlers_returnsDefaultWhenEmpty():void {
 		$handlerList = LogConfig::getHandlers();
