@@ -26,7 +26,7 @@ class LogConfig {
 			$handlerLevel = strtoupper(self::$handlerLevels[$i]);
 			$handlerLevelIndex = array_flip(LogLevel::ALL_LEVELS)[$handlerLevel];
 
-			if($handlerLevelIndex < $logLevelIndex) {
+			if($logLevelIndex > $handlerLevelIndex) {
 				continue;
 			}
 
