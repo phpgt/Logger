@@ -14,9 +14,7 @@ class LogConfig {
 	private static string $defaultHandlerLevel = LogLevel::DEBUG;
 
 	/** @return LogHandler[] */
-	public static function getHandlersWithMinimumLogLevel(
-		string $minimumLogLevel
-	):array {
+	public static function getHandlers(string $minimumLogLevel):array {
 		self::ensureAtLeastOneHandler();
 		$minimumLogLevel = strtoupper($minimumLogLevel);
 		$minimumLogLevelIndex = array_search(
