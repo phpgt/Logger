@@ -7,6 +7,7 @@ use Gt\Logger\LogLevel;
 use Gt\Logger\Test\Helper\StdOutToEcho;
 use PHPUnit\Framework\TestCase;
 
+/** @runTestsInSeparateProcesses  */
 class LogTest extends TestCase {
 	public function test_staticCalls():void {
 		$message = "Test info log";
@@ -52,6 +53,28 @@ class LogTest extends TestCase {
 			"/\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d\s+ERROR\s+$message\s+\[test-type = PHPUnit\] \[nested = \{\[one = first\] \[two = second\]\}\] \[this = that\]\n/"
 		);
 		Log::error($message, $context);
+	}
+
+	public function test_levelOutput():void {
+		LogConfig::setDefaultHandlerLevel(LogLevel::ERROR);
+		self::redirectDefaultHandlerToTestOutput();
+
+		Log::debug("This is not critical!");
+		Log::critical("This is critical!");
+		$output = self::getActualOutputForAssertion();
+		self::assertStringContainsString("This is critical!", $output);
+		self::assertStringNotContainsString("This is not critical!", $output);
+	}
+
+	public function test_levelOutput_all():void {
+		LogConfig::setDefaultHandlerLevel(LogLevel::DEBUG);
+		self::redirectDefaultHandlerToTestOutput();
+
+		Log::debug("This is not critical!");
+		Log::critical("This is critical!");
+		$output = self::getActualOutput();
+		self::assertStringContainsString("This is critical!", $output);
+		self::assertStringContainsString("This is not critical!", $output);
 	}
 
 	protected function redirectDefaultHandlerToTestOutput():void {

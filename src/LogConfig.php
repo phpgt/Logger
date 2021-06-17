@@ -14,19 +14,22 @@ class LogConfig {
 	private static string $defaultHandlerLevel = LogLevel::DEBUG;
 
 	/** @return LogHandler[] */
-	public static function getHandlers(
-		string $logLevel = LogLevel::DEBUG
+	public static function getHandlersWithMinimumLogLevel(
+		string $minimumLogLevel
 	):array {
 		self::ensureAtLeastOneHandler();
-		$logLevel = strtoupper($logLevel);
-		$logLevelIndex = array_flip(LogLevel::ALL_LEVELS)[$logLevel];
+		$minimumLogLevel = strtoupper($minimumLogLevel);
+		$minimumLogLevelIndex = array_search(
+			$minimumLogLevel,
+			LogLevel::ALL_LEVELS
+		);
 
 		$handlerArray = [];
 		foreach(self::$handlers as $i => $handler) {
 			$handlerLevel = strtoupper(self::$handlerLevels[$i]);
-			$handlerLevelIndex = array_flip(LogLevel::ALL_LEVELS)[$handlerLevel];
+			$handlerLevelIndex = array_search($handlerLevel, LogLevel::ALL_LEVELS);
 
-			if($logLevelIndex > $handlerLevelIndex) {
+			if($minimumLogLevelIndex < $handlerLevelIndex) {
 				continue;
 			}
 
@@ -42,6 +45,10 @@ class LogConfig {
 		}
 
 		return self::$defaultHandler;
+	}
+
+	public static function setDefaultHandlerLevel(string $level):void {
+		self::$defaultHandlerLevel = $level;
 	}
 
 	public static function addHandler(LogHandler $handler, string $logLevel = null):void {
