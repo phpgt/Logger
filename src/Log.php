@@ -48,7 +48,7 @@ class Log {
 		string $message,
 		array $context = []
 	):void {
-		foreach(LogConfig::getHandlersWithMinimumLogLevel($level) as $handler) {
+		foreach(LogConfig::getHandlers($level) as $handler) {
 			$handler->handle($level, $message, $context);
 		}
 	}
