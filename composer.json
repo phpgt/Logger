@@ -2,7 +2,6 @@
 	"name": "phpgt/logger",
 	"description": "PSR-3 logger and implementation.",
 	"type": "library",
-	"version": "dev-master",
 
 	"require": {
 		"php": ">=7.4"
