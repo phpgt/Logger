@@ -64,3 +64,9 @@ else {
 [psr3]: https://www.php-fig.org/psr/psr-3/
 [syslog]: https://tools.ietf.org/html/rfc5424
 [examples]: https://github.com/PhpGt/Logger/tree/master/examples
+
+# Proudly sponsored by
+
+[JetBrains Open Source sponsorship program](https://www.jetbrains.com/community/opensource/)
+
+[![JetBrains logo.](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)](https://www.jetbrains.com/community/opensource/)
