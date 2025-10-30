@@ -89,6 +89,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: PhpGt/Logger
 
   phpstan:
     runs-on: ubuntu-latest
