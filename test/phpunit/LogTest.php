@@ -72,7 +72,7 @@ class LogTest extends TestCase {
 
 		Log::debug("This is not critical!");
 		Log::critical("This is critical!");
-		$output = self::getActualOutput();
+		$output = self::getActualOutputForAssertion();
 		self::assertStringContainsString("This is critical!", $output);
 		self::assertStringContainsString("This is not critical!", $output);
 	}
