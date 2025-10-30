@@ -49,7 +49,10 @@ class LogConfig {
 		self::$defaultHandlerLevel = $level;
 	}
 
-	public static function addHandler(LogHandler $handler, string $logLevel = null):void {
+	public static function addHandler(
+		LogHandler $handler,
+		?string $logLevel = null,
+	):void {
 		array_push(self::$handlers, $handler);
 		array_push(self::$handlerLevels, $logLevel ?? self::$defaultHandlerLevel);
 	}
