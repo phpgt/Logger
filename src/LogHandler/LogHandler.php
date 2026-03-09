@@ -34,19 +34,19 @@ abstract class LogHandler {
 		$this->logLineEnding = $logLineEnding;
 	}
 
-	/** @param array<string> $context */
+	/** @param array<string, mixed> $context */
 	abstract public function handle(
 		string $level,
 		string $message,
 		array $context = []
 	):void;
 
-	/** @param array<string> $context */
+	/** @param array<string, mixed> $context */
 	abstract protected function unwrapContext(
 		array $context
 	):string;
 
-	/** @param array<string> $context */
+	/** @param array<string, mixed> $context */
 	protected function getLogLine(
 		string $level,
 		string $message,
