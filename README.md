@@ -37,11 +37,16 @@ use Gt\Logger\LogConfig;
 use Gt\Logger\LogLevel;
 use Gt\Logger\LogHandler\StreamHandler;
 use Gt\Logger\LogHandler\FileHandler;
+use Gt\Logger\LogHandler\StdErrHandler;
 
 // Send warnings and above to the remote socket.
 LogConfig::addHandler(new StreamHandler("/example/remote.sock"), LogLevel::WARNING);
 // Send all log types to the local log file.
 LogConfig::addHandler(new FileHandler("/var/log/example.log"), LogLevel::DEBUG);
+// Send only errors and above to STDERR.
+LogConfig::addHandler(new StdErrHandler(), LogLevel::ERROR, LogLevel::EMERGENCY);
+// Send lower-severity logs to STDOUT.
+LogConfig::addHandler(LogConfig::getDefaultHandler(), LogLevel::DEBUG, LogLevel::WARNING);
 
 $fileName = "name.txt";
 if(file_exists($fileName)) {

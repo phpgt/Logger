@@ -1,6 +1,7 @@
 <?php
 namespace Gt\Logger\LogHandler;
 
+use RuntimeException;
 
 class FileHandler extends LogHandler {
 	/** @var resource */
@@ -14,7 +15,11 @@ class FileHandler extends LogHandler {
 		string $separator = self::DEFAULT_SEPARATOR,
 		string $newLine = self::DEFAULT_LOG_LINE_ENDING
 	) {
-		$this->resource = fopen($path, "a");
+		$resource = fopen($path, "a");
+		if($resource === false) {
+			throw new RuntimeException("Unable to open log output: $path");
+		}
+		$this->resource = $resource;
 
 		parent::__construct(
 			$timestampFormat,
@@ -40,7 +45,7 @@ class FileHandler extends LogHandler {
 		return $this->resource;
 	}
 
-	/** @param array<string|array<string>> $context */
+	/** @param array<string, mixed> $context */
 	protected function unwrapContext(array $context):string {
 		$unwrapped = "";
 
@@ -53,6 +58,9 @@ class FileHandler extends LogHandler {
 				$value = "{"
 					. $this->unwrapContext($value)
 					. "}";
+			}
+			elseif(!is_scalar($value) && $value !== null) {
+				$value = get_debug_type($value);
 			}
 
 			$unwrapped .= "[$key = $value]";
