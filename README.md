@@ -1,14 +1,14 @@
 Simple logger for PHP applications.
 ===================================
 
-Start logging with zero configuration. By default, the logger works as a static singleton - `Log::error("You can't do that");` is all you need to get started. When you need to, you can configure the logger to send logs to different file/socket sources.
+Start logging with zero configuration. By default, the logger writes to standard output, so `Log::error("You can't do that");` is all you need to get started. When you need to, you can configure the logger to send logs to different file or stream sources.
 
-The aim of this library is minimalism. There are no plans to implement more logging sources than files and sockets. This simplifies the code into having a single responsibility, but remains modular to hook up to external scripts that handle logging to email addresses, Slack messages, AWS SQS, databases, etc.
+The aim of this library is minimalism. There are no large configuration objects or transport layers to learn first. We get a set of familiar log levels, a small handler system, and a straightforward way to route messages where they need to go.
 
 Log levels
 ----------
 
-This library implements the [PSR-3 interface][psr3]. This means that throughout your code, you can decide to log at the levels listed below, and your environment can decide the minimum log level to report. For instance, it would probably be too verbose to log debug information on a production server. This is consistent with the [Syslog protocol][syslog].
+This library uses the standard [PSR-3][psr3] level names. This means that throughout your code, you can decide to log at the levels listed below, and your environment can decide the minimum log level to report. For instance, it would probably be too verbose to log debug information on a production server. This is consistent with the [Syslog protocol][syslog].
 
 + `debug` - Detailed debugging information.
 + `info` - Interesting events.
@@ -19,14 +19,10 @@ This library implements the [PSR-3 interface][psr3]. This means that throughout 
 + `alert` - Action must be taken immediately.
 + `emergency` - System is unusable.
 
-Static usage
-------------
+Basic usage
+-----------
 
-[Static classes should only be used when truly stateless][styleguide-static]. Logging is one example of a class that has no side effects on the running program, so the primary usage expectation is to use static methods of the `Log` class to perform logging.
-
-It would be unnecessary to require passing an instance of the `Log` class around throughout all classes of your program, and it would be too opinionated to require the use of a dependency injection framework everywhere that logging is possible.
-
-However, certain programs require advanced logging features that are only satisfiable with instances of the `Log` class, such as having different log sources for different areas of the program. Take a look at the [examples directory][examples] to see how instantiation can be used for this purpose.
+The primary entry point is the static `Log` class. Configure handlers near the start of the application, then call the matching log-level method whenever you need it.
 
 Usage example
 -------------
@@ -67,10 +63,9 @@ else {
 
 The primary namespace is `GT\Logger`. The legacy `Gt\Logger` classes remain autoloadable for backwards compatibility.
 
-[styleguide-static]: https://github.com/PhpGt/StyleGuide/blob/master/classes/members.md#classes-should-have-all-or-no-static-members
+Full documentation is available in the wiki: https://github.com/PhpGt/Logger/wiki
 [psr3]: https://www.php-fig.org/psr/psr-3/
 [syslog]: https://tools.ietf.org/html/rfc5424
-[examples]: https://github.com/PhpGt/Logger/tree/master/examples
 
 # Proudly sponsored by
 
