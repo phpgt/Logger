@@ -23,12 +23,13 @@
 
 	"autoload": {
 		"psr-4": {
+			"GT\\Logger\\": "./src",
 			"Gt\\Logger\\": "./src"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Gt\\Logger\\Test\\": "./test/phpunit"
+			"GT\\Logger\\Test\\": "./test/phpunit"
 		}
 	},
 

@@ -1,5 +1,5 @@
 <?php
-namespace Gt\Logger;
+namespace GT\Logger;
 
 class Log {
 	/** @param array<string, mixed> $context */

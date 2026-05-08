@@ -1,8 +1,8 @@
 <?php
-namespace Gt\Logger;
+namespace GT\Logger;
 
-use Gt\Logger\LogHandler\LogHandler;
-use Gt\Logger\LogHandler\StdOutHandler;
+use GT\Logger\LogHandler\LogHandler;
+use GT\Logger\LogHandler\StdOutHandler;
 
 class LogConfig {
 	/** @var array<LogHandler> */

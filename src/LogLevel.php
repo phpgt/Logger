@@ -1,5 +1,5 @@
 <?php
-namespace Gt\Logger;
+namespace GT\Logger;
 
 class LogLevel {
 	const DEBUG = "DEBUG";

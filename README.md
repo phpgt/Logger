@@ -32,12 +32,12 @@ Usage example
 -------------
 
 ```php
-use Gt\Logger\Log;
-use Gt\Logger\LogConfig;
-use Gt\Logger\LogLevel;
-use Gt\Logger\LogHandler\StreamHandler;
-use Gt\Logger\LogHandler\FileHandler;
-use Gt\Logger\LogHandler\StdErrHandler;
+use GT\Logger\Log;
+use GT\Logger\LogConfig;
+use GT\Logger\LogLevel;
+use GT\Logger\LogHandler\StreamHandler;
+use GT\Logger\LogHandler\FileHandler;
+use GT\Logger\LogHandler\StdErrHandler;
 
 // Send warnings and above to the remote socket.
 LogConfig::addHandler(new StreamHandler("/example/remote.sock"), LogLevel::WARNING);
@@ -64,6 +64,8 @@ else {
         Log::info("Using default name");
 }
 ```
+
+The primary namespace is `GT\Logger`. The legacy `Gt\Logger` classes remain autoloadable for backwards compatibility.
 
 [styleguide-static]: https://github.com/PhpGt/StyleGuide/blob/master/classes/members.md#classes-should-have-all-or-no-static-members
 [psr3]: https://www.php-fig.org/psr/psr-3/
