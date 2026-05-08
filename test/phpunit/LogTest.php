@@ -1,12 +1,12 @@
 <?php
-namespace Gt\Logger\Test;
+namespace GT\Logger\Test;
 
-use Gt\Logger\Log;
-use Gt\Logger\LogConfig;
-use Gt\Logger\LogHandler\FileHandler;
-use Gt\Logger\LogHandler\StdErrHandler;
-use Gt\Logger\LogLevel;
-use Gt\Logger\Test\Helper\StdOutToEcho;
+use GT\Logger\Log;
+use GT\Logger\LogConfig;
+use GT\Logger\LogHandler\FileHandler;
+use GT\Logger\LogHandler\StdErrHandler;
+use GT\Logger\LogLevel;
+use GT\Logger\Test\Helper\StdOutToEcho;
 use PHPUnit\Framework\TestCase;
 
 /** @runTestsInSeparateProcesses  */

@@ -1,5 +1,5 @@
 <?php
-namespace Gt\Logger\LogHandler;
+namespace GT\Logger\LogHandler;
 
 use RuntimeException;
 

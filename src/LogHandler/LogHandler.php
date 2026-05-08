@@ -1,5 +1,5 @@
 <?php
-namespace Gt\Logger\LogHandler;
+namespace GT\Logger\LogHandler;
 
 abstract class LogHandler {
 	const DEFAULT_LOG_FORMAT = [

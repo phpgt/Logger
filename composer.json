@@ -17,25 +17,35 @@
 	"authors": [
 		{
 			"name": "Greg Bowler",
-			"email": "greg.bowler@g105b.com"
+			"email": "greg@g105b.com"
 		}
 	],
 
 	"autoload": {
 		"psr-4": {
+			"GT\\Logger\\": "./src",
 			"Gt\\Logger\\": "./src"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Gt\\Logger\\Test\\": "./test/phpunit"
+			"GT\\Logger\\Test\\": "./test/phpunit"
 		}
+	},
+
+	"scripts": {
+		"phpunit": "vendor/bin/phpunit --configuration phpunit.xml",
+		"phpstan": "vendor/bin/phpstan analyse --level 6 src --memory-limit 256M",
+		"test": [
+			"@phpunit",
+			"@phpstan"
+		]
 	},
 
 	"funding": [
 		{
 			"type": "github",
-			"url": "https://github.com/sponsors/PhpGt"
+			"url": "https://github.com/sponsors/phpgt"
 		}
 	]
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Gt\Logger\Test\Helper;
+namespace GT\Logger\Test\Helper;
 
 use php_user_filter;
 

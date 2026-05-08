@@ -1,5 +1,5 @@
 <?php
-namespace Gt\Logger\LogHandler;
+namespace GT\Logger\LogHandler;
 
 /**
  * As a file handler can easily open and write to a stream, this class currently
