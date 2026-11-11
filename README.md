@@ -61,6 +61,8 @@ else {
 }
 ```
 
+Both level bounds in `LogConfig::addHandler()` accept `null`. An omitted or `null` minimum uses the default level at registration; an omitted or `null` maximum leaves the upper bound unrestricted. These parameters are explicitly nullable for compatibility with PHP 8.4 and later.
+
 The primary namespace is `GT\Logger`. The legacy `Gt\Logger` classes remain autoloadable for backwards compatibility.
 
 Full documentation is available in the wiki: https://github.com/PhpGt/Logger/wiki
