@@ -69,6 +69,10 @@ Full documentation is available in the wiki: https://github.com/PhpGt/Logger/wik
 [psr3]: https://www.php-fig.org/psr/psr-3/
 [syslog]: https://tools.ietf.org/html/rfc5424
 
+## Running the tests
+
+Run `composer test` to check logging behaviour and static analysis. Handler tests use in-memory streams to check line formatting, context rendering and successive writes without creating log files.
+
 # Proudly sponsored by
 
 [JetBrains Open Source sponsorship program](https://www.jetbrains.com/community/opensource/)
